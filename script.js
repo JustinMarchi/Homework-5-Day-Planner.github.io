@@ -12,30 +12,36 @@ $(".Hour").each(function(i){
     $(this).text(moment().hour(i+9).format("h A"))
     
 })
+console.log(currentTime);
 
 
 
-$(".HourRow").each(function(i){
+$('.HourRow').each(function(i) {
     console.log(timeArray.indexOf(currentTime));
-    if (timeArray.indexOf(currentTime) < i){
-        $(".HourForm").addClass("past");
-        $(".saveToDo").prop('disabled', true);
-        $(".saveToDo").addClass("past");
-        $(".Hour").addClass("past");
-    }else if (timeArray.indexOf(currentTime) == i){
-        $(".HourForm").addClass("present");
-        $(".saveToDo").addClass("present");
-        $(".saveToDo").prop('disabled', false);
-        $(".Hour").addClass("present");
-    }else if (timeArray.indexOf(currentTime) > i){
-        $(".HourForm").addClass("future");
-        $(".saveToDo").addClass("future");
-        $(".saveToDo").prop('disabled', false);
-        $(".Hour").addClass("future");
+    if (timeArray.indexOf(currentTime) > i) {
+      $(`#${i}`).addClass('past');
+      $(`#saveToDo-${i}`).prop('disabled', true);
+      $(`#saveToDo-${i}`).addClass('past');
+      $(`#hour-${i}`).addClass('past');
+    } else if (timeArray.indexOf(currentTime) == i) {
+      $(`#${i}`).addClass('present');
+      $(`#saveToDo-${i}`).addClass('present');
+      $(`#saveToDo-${i}`).prop('disabled', false);
+      $(`#hour-${i}`).addClass('present');
+    } else if (timeArray.indexOf(currentTime) < i) {
+      $(`#${i}`).addClass('future');
+      $(`#saveToDo-${i}`).addClass('future');
+      $(`#saveToDo-${i}`).prop('disabled', false);
+      $(`#hour-${i}`).addClass('future');
     }
-})
-
-
-
+  });
 
 });
+  
+  $("button").on("click", function(){
+      $('input, select, textarea').each(function() {
+       var value = $(this).val(),
+           name = $(this).attr('name');
+       localStorage[name] = value;
+               
+  })});
